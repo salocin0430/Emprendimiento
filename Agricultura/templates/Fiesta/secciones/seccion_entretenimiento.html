@@ -1,0 +1,107 @@
+{% load staticfiles %}
+<div class="card border-dark mb-2">
+	<div class="card-header bg-transparent">
+		<div class="row justify-content-between">
+			<div class="col">
+				<h4>Entretenimiento</h4>
+			</div>
+			<div class="col text-right">
+				<span class="btn" data-toggle="collapse" data-target="#collapseDeco" aria-expanded="false" aria-controls="collapseDeco">
+					<i class="material-icons">expand_more</i>
+  				</span>
+			</div>
+		</div>
+  	</div>
+  	<div class="collapse" id="collapseDeco">
+		{% for e in entretenimiento %}
+ 		<div class="card-body">
+ 			<form method="POST">{% csrf_token %}
+				<div class="card">
+					<div class="card-body">
+        				<div class="media">
+						  	<img class="align-self-center mr-3" src="{{e.Entretenimiento.imagen.url}}" height="120">
+						  	<div class="media-body">
+						    	<h5 class="mt-0"><strong>{{e.Entretenimiento.nombre}}</strong></h5><br>
+						    	<p>{{e.Entretenimiento.descripcion}}</p>
+						    	<div class="media">
+								  	<div class="media-body">
+								    	<p class="precio">Precio: ${{e.Entretenimiento.precioSTR}}</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col text-right">
+										<input name="entretenimiento_carrito_id" value="{{e.id}}" hidden>
+										<input name="entretenimiento_id" value="{{e.Entretenimiento.id}}" hidden>
+										<input name="price" value="{{e.Entretenimiento.precio}}" hidden>
+										<button type="submit" class="btn btn-danger" value="delete_entretenimiento" name="btn_value">Eliminar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		{% endfor %}
+		{% if flag_entre %}
+			<div class="card-body text-center">
+	    		<p>¿Crees que aún hay espacio para algo más?</p>
+	    		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#EntretenimientoModal">¡Agregar entretenimientos!</button>
+	  		</div>
+	  	{% else %} {% comment %}Cuando no tiene seleccionado uno o más entretenimientos{% endcomment %}
+		<div class="card-body text-center">
+		      <h4 class="card-title, tittle-center, font-weight-bold">Aún no tienes agregado algún entretenimiento para tu fiesta.</h4>
+		      <p class="card-text, text-center">¡Presiona en agregar para escoger entretenimiento para tu fiesta!</p>
+		      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#EntretenimientoModal">¡Agregar entretenimientos!</button>
+		   </div>
+		</div>
+		{% endif %}
+	</div>
+</div>
+
+<div class="modal fade" id="EntretenimientoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<h5 class="modal-title">Entretenimientos</h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+      		</div>
+      		<div class="modal-body">
+      		{% for  entre in Entretenimientos  %}
+						{% if entre.id not in indices_entretenimientos %}
+		      			<form method="POST">{% csrf_token %}
+			      			<div class="card mb-2">
+		  						<div class="card-body">
+			        				<div class="media">
+							  			<img class="align-self-center mr-3 " src="{{entre.imagen.url}}" height="150">
+							  			<div class="media-body">
+							    			<h5 class="mt-0"><strong>{{entre.nombre}}</strong></h5>
+							    			<p>{{entre.descripcion}}</p>
+							    			<div class="media">
+									  			<div class="media-body">
+									    			<p class="precio">${{entre.precioSTR}}</p>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col text-right">
+													<input name="id_entretenimiento" value="{{entre.id}}" hidden>
+													<input name="price" value="{{entre.precio}}" hidden>
+	    											<button type="submit" class="btn btn-primary" value="add_entretenimiento" name="btn_value">Agregar</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						{% endif %}
+					{% endfor %}
+					</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      		</div>
+    	</div>
+  	</div>
+</div>

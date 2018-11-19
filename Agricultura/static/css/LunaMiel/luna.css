@@ -1,0 +1,8 @@
+.table .imagen{
+    max-width: 150px;
+    height: auto;
+    max-height: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,42 @@
+
+.img-entretenimiento{
+	float:left;
+	width: 50%;
+}
+
+.modal-dialog {
+  max-width: 800px;
+  margin: 1.75rem auto;
+}
+
+.card-entretenimiento{
+	flex-direction: row;
+	margin: 10px 0; 
+	max-height: 360px;
+	overflow: hidden;
+}
+
+
+.card-body-entretenimiento{
+	width: 100%;
+	float:right;
+	text-align: right;
+	bottom:10px;
+	position: absolute;
+	padding: 20px;
+}
+
+.card-llena-entretenimiento{
+	flex-direction: row;
+	max-height: 600px;
+	max-width: 1000px;
+	margin: 0 auto; 
+  float: none; 
+  margin-bottom: 10px; 
+
+}
+
+.llena-img-entretenimiento{
+	height: 400px;
+	width: 400px;
+}

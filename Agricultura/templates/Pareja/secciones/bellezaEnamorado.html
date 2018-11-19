@@ -1,0 +1,201 @@
+{% load staticfiles %}
+
+<div class="card border-dark mb-2">
+	<div class="card-header bg-transparent">
+		<div class="row justify-content-between">
+			<div class="col">
+				<h4>Belleza</h4>
+			</div>
+			<div class="col text-right">
+				<span class="btn" data-toggle="collapse" data-target="#collapseBelleza" aria-expanded="false" aria-controls="collapseBelleza">
+					<i class="material-icons">expand_more</i>
+  				</span>
+			</div>
+		</div>
+  	</div>
+  	<div class="collapse " id="collapseBelleza">
+		{% for a in belleza  %}
+		<div class="card-body">
+	    	<form method="POST">{% csrf_token %}
+	    		<div class="card">
+					<div class="card-body">
+        				<div class="media">
+	   	    				<img class="align-self-center mr-3 little" src="{{a.Belleza.imagen.url}}" height="150">
+	   	    				<div class="media-body">
+
+			        			<p class="card-text"><strong>Maquillaje: </strong>{{a.Belleza.maquillaje}}</p>		  
+								<p class="card-text"><strong>Peinado: </strong>{{a.Belleza.peinado}}</p>
+			        			<div class="media">
+			        				<i class="material-icons">attach_money</i>
+									<div class="media-body">
+						        		<p>{{a.Belleza.precio}}</p>
+						        	</div>
+						        </div>
+						        <div class="row">
+									<div class="col text-right">
+									        <input name="carrito_belleza_id" value="{{a.id}}" hidden>
+											<input name="belleza_id" value="{{a.Belleza.id}}" hidden>
+											<input name="price" value="{{a.Belleza.precio}}" hidden>
+									        <button type="submit" class="btn btn-danger" name="btn_value" value="delete_belleza">Eliminar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	{% endfor %}
+	{% if flag_entre %}
+				
+	    	<div class="card-body text-center">
+		    	<p>¿Aún hay espacio para algo más?</p>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BellezaModal">¡Agregar accesorio!</button>
+				</div>
+			{% else %} {% comment %}Cuando no tiene seleccionado nada de belleza o maquillaje{% endcomment %}
+			<div class="card-body text-center">
+			      <h4 class="card-title, tittle-center, font-weight-bold">Deseas agregar belleza o maquillaje.</h4>
+			      <p class="card-text, text-center">¡Presiona en agregar para escoger belleza o maquillaje!</p>
+			      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BellezaModal">¡Agregar Belleza!</button>
+			</div>
+			
+			{% endif %}
+	</div>
+</div>
+
+<div class="modal fade" id="BellezaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+	<div class="modal-dialog modal-lg" role="document">
+
+    	<div class="modal-content">
+
+      		<div class="modal-header">
+
+        		<h5 class="modal-title">Belleza</h5>
+
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+          			<span aria-hidden="true">&times;</span>
+
+        		</button>
+
+      		</div>
+
+      		<div class="modal-body">
+
+      		{% for  look in Bellezas %}
+				{% if look.id not in lista_bellezas %}
+				   	<form method="POST">{% csrf_token %}
+				   		<div class="card mb-2">
+		  						<div class="card-body">
+			        				<div class="media">
+				    					<img class="align-self-center mr-3 little" src="{{look.imagen.url}}" height="150">
+				    					<div class="media-body">
+					        				<p class="card-text"><strong>Maquillaje: </strong>{{look.maquillaje}}</p>
+					        				<p class="card-text"><strong>Peinado: </strong>{{look.peinado}}</p>
+					        				<div class="media">
+									  			
+					       						<i class="material-icons">attach_money</i>
+								  				<div class="media-body">
+								  					<p>{{look.precio}}</p>
+								  				</div>
+					       					    
+					       					</div> 
+					       					<div class="row">
+												<div class="col text-right">   
+											        <input name="id_belleza" value="{{look.id}}" hidden>
+													<input name="price" value="{{look.precio}}" hidden>
+											        <button type="submit" class="btn btn-primary"  name="btn_value" value="add_belleza">Agregar</button>
+											        	
+											    </div>
+											</div>
+									    </div>
+									</div>
+								</div>
+						</div>
+					
+				</form>		
+				{% endif %}
+			{% endfor %}
+
+			</div>
+
+      		<div class="modal-footer">
+
+        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+      		</div>
+
+    	</div>
+
+  	</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,166 @@
+	{% load staticfiles %}
+
+<div class="card border-dark mb-2">
+	<div class="card-header bg-transparent">
+		<div class="row justify-content-between">
+			<div class="col">
+				<h4>Accesorios</h4>
+			</div>
+			<div class="col text-right">
+				<span class="btn" data-toggle="collapse" data-target="#collapseAccesorio" aria-expanded="false" aria-controls="collapseAccesorio">
+					<i class="material-icons">expand_more</i>
+  				</span>
+			</div>
+		</div>
+  	</div>
+  	<div class="collapse" id="collapseAccesorio">
+		{% for a in accesorio  %}
+		<div class="card-body">
+			<form method="POST">{% csrf_token %}
+	    		<div class="card">
+					<div class="card-body">
+        				<div class="media">
+	    					<img class="align-self-center mr-3 little" src="{{a.Accesorio.imagen.url}}" height="150">
+	    					<div class="media-body">
+		        				<h4 class="mt-0">{{a.Accesorio.nombre}}</h4>
+								<p class="card-text"><strong>Tipo: </strong>{{a.Accesorio.tipoObjeto}}</p>
+								<div class="media">
+									<i class="material-icons">attach_money</i>
+									<div class="media-body">
+		       							 <p class="card-text">{{a.Accesorio.precio}}</p>
+		       						</div>
+		       					</div>
+		       					<div class="row">
+									<div class="col text-right">
+										<input name="carrito_accesorio_id" value="{{a.id}}" hidden>
+										<input name="accesorio_id" value="{{a.Accesorio.id}}" hidden>
+										<input name="price" value="{{a.Accesorio.precio}}" hidden>
+										<button type="submit" class="btn btn-danger" name="btn_value" value="delete_accesorio">Eliminar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		{% endfor %}
+		{% if flag_entre %}
+			
+    		<div class="card-body text-center">
+	    		<p>¿Aún hay espacio para algo más?</p>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AccesorioModal">¡Agregar accesorio!</button>
+			</div>
+		{% else %} {% comment %}Cuando no tiene seleccionado uno o más accesorios{% endcomment %}
+		<div class="card-body text-center">
+		      <h4 class="card-title, tittle-center, font-weight-bold">Deseas agregar algún accesorio.</h4>
+		      <p class="card-text, text-center">¡Presiona en agregar para escoger tus accesorios!</p>
+		      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AccesorioModal">¡Agregar accesorio!</button>
+		</div>
+		
+		{% endif %}
+	</div>
+</div>
+
+<div class="modal fade" id="AccesorioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+	<div class="modal-dialog modal-lg" role="document">
+
+    	<div class="modal-content">
+
+      		<div class="modal-header">
+
+        		<h5 class="modal-title">Accesorios</h5>
+
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+          			<span aria-hidden="true">&times;</span>
+
+        		</button>
+
+      		</div>
+
+      		<div class="modal-body">
+
+      		{% for  cosas in Accesorios %}
+				{% if cosas.id not in lista_accesorios %}
+				    	<form method="POST">{% csrf_token %}
+				    		<div class="card mb-2">
+		  						<div class="card-body">
+			        				<div class="media">
+				    					<img class="align-self-center mr-3 little" src="{{cosas.imagen.url}}" height="150">
+				    					<div class="media-body">
+					        				<h4 class="mt-0">{{cosas.nombre}}</h4>
+											 <p class="card-text"><strong>Tipo: </strong>{{cosas.tipoObjeto}}</p>
+											 <div class="media">
+											 	<i class="material-icons">attach_money</i>
+											 	<div class="media-body">
+													<p>{{cosas.precio}}</p>
+												</div>
+												
+											</div>
+											<div class="row">
+												<div class="col text-right">
+													 <input name="id_accesorio" value="{{cosas.id}}" hidden>
+													<input name="price" value="{{cosas.precio}}" hidden>
+													 <button type="submit" class="btn btn-primary"  name="btn_value" value="add_accesorio">Agregar</button>
+														
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+				        </form>
+				        {% endif %}
+				{% endfor %}
+
+			</div>
+
+      		<div class="modal-footer">
+
+        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+      		</div>
+
+    	</div>
+
+  	</div>
+
+</div>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+#ComidaModal{
+
+}
+
+.img-comida{
+	float:left;
+	width: 50%;
+}
+
+.modal-dialog {
+  max-width: 800px;
+  margin: 1.75rem auto;
+}
+
+.card-comidas{
+	flex-direction: row;
+	margin: 10px 0;
+	max-height: 360px;
+	overflow: hidden;
+}
+
+
+.card-body-comidas{
+	width: 100%;
+	float:right;
+	text-align: right;
+	bottom:10px;
+	position: absolute;
+	padding: 20px;
+}
+
+.card-llena-comidas{
+	flex-direction: row;
+	max-height: 600px;
+	max-width: 1000px;
+	margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+
+}
+
+.llena-img-comida{
+	height: 400px;
+	width: 400px;
+}
+.precio {
+	font-size: 18px;
+	font-weight: bold;
+	color: #696969;
+}

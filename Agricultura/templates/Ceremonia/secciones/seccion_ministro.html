@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load staticfiles %}
+</head>
+<body>
+
+	<div class="card border-dark mb-2">
+		<div class="card-header bg-transparent">
+			<div class="row justify-content-between">
+				<div class="col">
+					<h4>Ministro</h4>
+				</div>
+				<div class="col text-right">
+					<span class="btn" data-toggle="collapse" data-target="#collapseMinistro" aria-expanded="false" aria-controls="collapseMinistro">
+						<i class="material-icons">expand_more</i>
+	  				</span>
+				</div>
+			</div>
+	  	</div>
+	  	<div class="collapse show" id="collapseMinistro">
+	 		<div class="card-body">
+	 			{% if flag_ministro %}
+	 			<form method="POST">{% csrf_token %}
+					<div class="card">
+						<div class="card-body">
+	        				<div class="media">
+							  	<img class="align-self-center mr-3" src="{{ceremonia.Ministro.imagen.url}}" height="120">
+							  	<div class="media-body">
+							    	<h5 class="mt-0">{{ceremonia.Ministro.nombre}}</h5>
+							    	<p>{{ceremonia.Ministro.tipo}}</p>
+							    	<div class="media">
+							  			<i class="material-icons">attach_money</i>
+									  	<div class="media-body">
+									    	<p>{{ceremonia.Ministro.precio}}</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col text-right">
+											<input name="id_ministro" value="{{ceremonia.Ministro.id}}" hidden>
+											<input name="price" value="{{ceremonia.Ministro.precio}}" hidden>
+											<button type="submit" class="btn btn-danger" value="delete_ministro" name="btn_value">Eliminar</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				{% else %}
+				<div class="row">
+	    			<div class="col text-center">
+			    		<p>Elige la persona que formalizará su relación.</p>
+			    		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalministro">¡Elegir ministro!</button>
+	    			</div>
+	    		</div>
+	    		{% endif %}
+	  		</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modalministro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<h5 class="modal-title">Ministro</h5>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+	      		<div class="modal-body">
+	      			{% for ministro in ministros %}
+	      			<form method="POST">{% csrf_token %}
+		      			<div class="card mb-2">
+	  						<div class="card-body">
+		        				<div class="media">
+						  			<img class="d-none d-lg-block align-self-center mr-3" src="{{ministro.imagen.url}}" height="150">
+						  			<div class="media-body">
+						  				<div class="row mb-3">
+						  					<div class="col-12 text-center">
+						  						<img class="d-lg-none align-self-center mr-3" src="{{ministro.imagen.url}}" height="150">
+						  					</div>
+						  				</div>
+						    			<h5 class="mt-0">{{ministro.nombre}}</h5>
+						    			<p>{{ministro.tipo}}</p>
+						    			<div class="media">
+						  					<i class="material-icons">attach_money</i>
+								  			<div class="media-body">
+								    			<p>{{ministro.precio}}</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col text-right">
+												<input name="id_ministro" value="{{ministro.id}}" hidden>
+												<input name="price" value="{{ministro.precio}}" hidden>
+												<button type="submit" class="btn btn-primary" value="add_ministro" name="btn_value">Agregar</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+					{% endfor %}
+				</div>
+	      		<div class="modal-footer">
+	        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	      		</div>
+	    	</div>
+	  	</div>
+	</div>
+</body>
+</html>

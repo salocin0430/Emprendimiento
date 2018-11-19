@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<div class="card border-dark mb-2">
+  <div class="card-header bg-transparent">
+    <div class="row justify-content-between">
+      <div class="col">
+        <h4>Fotografía</h4>
+      </div>
+      <div class="col text-right">
+        <span class="btn" data-toggle="collapse" data-target="#collapseFotos" aria-expanded="false" aria-controls="collapseFotos">
+          <i class="material-icons">expand_more</i>
+          </span>
+      </div>
+    </div>
+    </div>
+    <div class="collapse" id="collapseFotos">
+    {% if flag_foto %}
+    <div class="card-body text-center">
+      <form method="POST">{% csrf_token %}
+          <p>¿Deseas remover la toma de fotografias en su ceremonia?</p>
+          <button type="submit" class="btn btn-danger" value="delete_foto" name="btn_value">Remover</button>
+        </form>
+      </div>
+    {% else %}
+    <div class="card-body text-center">
+      <form method="POST">{% csrf_token %}
+          <p>Una imagen vale más que mil palabras ¿Por qué no hacer de la ceremonia algo memorable?</p>
+          <button type="submit" class="btn btn-primary" value="add_foto" name="btn_value">¡Agregar toma de fotografías!</button>
+        </form>
+      </div>
+      {% endif %}
+  </div>
+</div>

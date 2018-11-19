@@ -1,0 +1,39 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+<link href="{% static 'css/Fiesta/style_entretenimiento.css' %}" rel="stylesheet" />
+<link href="{% static 'css/Fiesta/style_comidas.css' %}" rel="stylesheet" />
+{% if mensaje.0 %}
+		<div class="alert alert-warning" role="alert">
+	  		{{mensaje.1}} !
+		</div>
+	{% endif %}
+
+	{% if mensaje_succes.0 %}
+		<div class="alert alert-info" role="alert">
+	  		{{mensaje_succes.1}} !
+		</div>
+	{% endif %}
+
+	{% if mensaje_delete.0 %}
+		<div class="alert alert-info" role="alert">
+	  		{{mensaje_delete.1}} !
+		</div>
+	{% endif %}
+{% endblock title %}
+
+{% block name_mod %}
+	<div class="card-header border-dark">
+    	Ceremonia
+  	</div>
+{% endblock name_mod %}
+
+{% block content %}
+	{% include "Ceremonia/secciones/seccion_lugar.html" %}
+	{% include "Ceremonia/secciones/seccion_ministro.html" %}
+	{% include "Ceremonia/secciones/seccion_musica.html" %}
+	{% include "Ceremonia/secciones/seccion_fotografia.html" %}
+	{% include "Ceremonia/secciones/seccion_decoracion.html" %}
+	{% include "Ceremonia/secciones/seccion_precio.html" %}
+{% endblock content %}	

@@ -1,0 +1,43 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+<link href="{% static 'css/Pareja/style_accesorio.css' %}" rel="stylesheet" />
+<link href="{% static 'css/Fiesta/style_comidas.css' %}" rel="stylesheet" />
+<link href="{% static 'css/Pareja/style.css' %}" rel="stylesheet" />
+{% if mensaje.0 %}
+		<div class="alert alert-warning" role="alert">
+	  		{{mensaje.1}} !
+		</div>
+	{% endif %}
+
+	{% if mensaje_succes.0 %}
+		<div class="alert alert-info" role="alert">
+	  		{{mensaje_succes.1}} !
+		</div>
+	{% endif %}
+
+	{% if mensaje_delete.0 %}
+		<div class="alert alert-info" role="alert">
+	  		{{mensaje_delete.1}} !
+		</div>
+	{% endif %}
+{% endblock title %}
+
+{% block name_mod %}
+	<div class="card-header border-dark">
+    	Enamorado - {{ enamorado.User.first_name }} {{ enamorado.User.last_name }}
+  	</div>
+{% endblock name_mod %}
+
+{% block content %}
+	{% include "Pareja/secciones/prendaEnamorado.html" %}
+	{% include "Pareja/secciones/bellezaEnamorado.html" %}
+	{% include "Pareja/secciones/accesorioEnamorado.html" %}
+	{% include "Pareja/secciones/precio.html" %}
+	
+
+{% endblock content %}
+
+
+

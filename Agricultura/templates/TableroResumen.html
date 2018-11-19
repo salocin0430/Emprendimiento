@@ -1,0 +1,214 @@
+{% extends "base/base.html" %}
+	{% block name_mod %}
+		<div class="card-header border-dark">
+	    	Resumen de tu boda
+	  	</div>	
+	{% endblock name_mod %}
+
+	{% block content %}
+
+	<div class="card border-dark mb-2">
+		<div class="card-header bg-transparent">
+			<div class="row justify-content-between">
+				<div class="col">
+					<h4>Fiesta</h4>
+				</div>
+				<div class="col text-right">
+					<span class="btn" data-toggle="collapse" data-target="#collapseFiesta" aria-expanded="false" aria-controls="collapseFiesta">
+						<i class="material-icons">expand_more</i>
+	  				</span>
+				</div>
+			</div>
+	  	</div>
+	  	<div class="collapse" id="collapseFiesta">
+	 		<div class="card-body">
+	 			<div class="container">
+	 			  <div class="row">
+	 			  	<div class="col text-left">
+	 			  	{% if not fiesta.Fotos %}
+		 			  	<h5 class="text-danger">Fotos no asignadas</h5>
+	 			  	{% endif %}
+
+	 			  	{% if fiesta.Lugar is None %}
+		 			  	<h5 class="text-danger">Lugar no signado</h5>
+			    	{% endif %}
+			    	{% if not precio_entre.0 %}
+			    		<h5 class="text-danger">Entretenimientos no asignados</h5>
+			    	{% endif %}
+			    	{% if not precio_alim.0 %}
+			    		<h5 class="text-danger">Alimentos no asignados</h5>	
+			    	{% endif %}
+			      </div>
+	 			</div>
+				  <div class="row mt-4">
+				    <div class="col text-left">
+				      <h1>Costo Total:</h1>
+				    </div>
+				    <div class="col text-right">
+				      <h1 class="display-4 text-info precioResumen"><strong>${{precio_fiesta}}</strong></h1>
+				    </div>
+				  </div>
+				</div>
+	  		</div>
+		</div>
+	</div>
+
+	<div class="card border-dark mb-2">
+		<div class="card-header bg-transparent">
+			<div class="row justify-content-between">
+				<div class="col">
+					<h4>Ceremonia</h4>
+				</div>
+				<div class="col text-right">
+					<span class="btn" data-toggle="collapse" data-target="#collapseCeremonia" aria-expanded="false" aria-controls="collapseCeremonia">
+						<i class="material-icons">expand_more</i>
+	  				</span>
+				</div>
+			</div>
+	  	</div>
+	  	<div class="collapse" id="collapseCeremonia">
+	 		<div class="card-body">
+	 			<div class="container">
+	 			<div class="row">
+	 			  	<div class="col text-left">
+	 			  	{% if ceremonia.Ministro is None %}
+		 			  	<h5 class="text-danger">Ministro no asignado</h5>
+	 			  	{% endif %}
+	 			  	{% if ceremonia.Lugar is None %}
+		 			  	<h5 class="text-danger">Lugar no signado</h5>
+			    	{% endif %}
+			    	{% if ceremonia.Musica is None %}
+			    		<h5 class="text-danger">Musica no asignada</h5>
+			    	{% endif %}
+			    	{% if not ceremonia.Fotos %}
+			    		<h5 class="text-danger">Fotos no asignadas</h5>
+			    	{% endif %}
+			    	{% if not flag_deco %}
+			    		<h5 class="text-danger">Decoraciones no asignadas</h5>
+			    	{% endif %}
+			      </div>
+	 			</div>
+				  <div class="row mt-4">
+				    <div class="col text-left">
+				      <h1>Costo Ceremonia:</h1>
+				    </div>
+				    <div class="col text-right">
+				      <h1 class="display-4 text-info precioResumen"><strong>${{precio_ceremonia}}</strong></h1>
+				    </div>
+				  </div>
+				</div>
+	  		</div>
+		</div>
+	</div>
+
+	<div class="card border-dark mb-2">
+		<div class="card-header bg-transparent">
+			<div class="row justify-content-between">
+				<div class="col">
+					<h4>Luna de miel</h4>
+				</div>
+				<div class="col text-right">
+					<span class="btn" data-toggle="collapse" data-target="#collapseLuna" aria-expanded="false" aria-controls="collapseLuna">
+						<i class="material-icons">expand_more</i>
+	  				</span>
+				</div>
+			</div>
+	  	</div>
+	  	<div class="collapse" id="collapseLuna">
+	 		<div class="card-body">
+	 			<div class="container">
+	 			  <div class="row">
+	 			  	<div class="col text-left">
+	 			  	{% if not flag_activi %}
+		 			  	<h5 class="text-danger">Actividades no asignadas</h5>
+	 			  	{% endif %}
+	 			  	{% if not flag_hotel %}
+		 			  	<h5 class="text-danger">Hoteles no signados</h5>
+			    	{% endif %}
+			      </div>
+	 			</div>
+				  <div class="row mt-4">
+				    <div class="col text-left">
+				      <h1>Costo Luna de miel:</h1>
+				    </div>
+				    <div class="col text-right">
+				      <h1 class="display-4 text-info precioResumen"><strong>${{precio_luna}}</strong></h1>
+				    </div>
+				  </div>
+				</div>
+	  		</div>
+		</div>
+	</div>
+
+	<div class="card border-dark mb-2">
+		<div class="card-header bg-transparent">
+			<div class="row justify-content-between">
+				<div class="col">
+					<h4>Pareja</h4>
+				</div>
+				<div class="col text-right">
+					<span class="btn" data-toggle="collapse" data-target="#collapsePareja" aria-expanded="false" aria-controls="collapsePareja">
+						<i class="material-icons">expand_more</i>
+	  				</span>
+				</div>
+			</div>
+	  	</div>
+	  	<div class="collapse" id="collapsePareja">
+	 		<div class="card-body">
+	 			<div class="container">
+	 			  <div class="row">
+	 			  	<div class="col text-left">
+	 			  		<small class="lead">enamorado {{enamoradoNombre.User.first_name}} {{enamoradoNombre.User.last_name}}</small><br>
+	 			  		{% if not flag_belleza1 %}
+	 			  			<h5 class="text-danger">No se han asignado bellezas para este enamorado</h5>
+	 			  		{% endif %}
+	 			  		{% if not flag_prenda1 %}
+	 			  			<h5 class="text-danger">No se han asignado prendas para este enamorado</h5>
+	 			  		{% endif %}
+	 			  		{% if not flag_accesorio1 %}
+	 			  			<h5 class="text-danger">No se han asignado accesorios</h5>
+	 			  		{% endif %}
+	 			  	</div>
+	 			  	<div class="col text-right">
+	 			  		<small class="lead">enamorado  {{enamoradoNombre2.User.first_name}} {{enamoradoNombre2.User.last_name}}</small>	<br>
+	 			  		{% if not flag_belleza2 %}
+	 			  			<h5 class="text-danger">No se han asignado bellezas para este enamorado</h5>
+	 			  		{% endif %}
+	 			  		{% if not flag_prenda2 %}
+	 			  			<h5 class="text-danger">No se han asignado prendas para este enamorado</h5>
+	 			  		{% endif %}
+	 			  		{% if not flag_accesorio2 %}
+	 			  			<h5 class="text-danger">No se han asignado accesorios</h5>
+	 			  		{% endif %}
+	 			  	</div>
+	 			  </div><br><br>
+				  <div class="row mt-6">
+				    <div class="col-md-9 text-left">
+				      <h4 >Costo enamorado {{enamoradoNombre.User.first_name}} {{enamoradoNombre.User.last_name}}:</h4>
+				      <h4>Costo enamorado  {{enamoradoNombre2.User.first_name}} {{enamoradoNombre2.User.last_name}}:</h4>
+				      <h3>Costo total pareja:</h3>
+				    </div>
+				    <div class="col text-right">
+				      <h3 class="text-info precioResumen"><strong>${{precio_enamorado}}</strong></h3>
+				      <h3 class="text-info precioResumen"><strong>${{precio_enamorado2}}</strong></h3>
+				      <h3 class="text-info precioResumen"><strong>${{precio_pareja}}</strong></h3>
+				    </div>
+				  </div>
+				</div>
+	  		</div>
+		</div>
+	</div>
+
+	<div class="container">
+	  <div class="row mt-4">
+	    <div class="col text-left">
+	      <h1>Costo Boda:</h1>
+	    </div>
+	    <div class="col text-right">
+	      <h1 class="display-4 text-info precioResumen"><strong>${{precio_boda}}</strong></h1>
+	    </div>
+	  </div>
+	</div>
+
+
+	{% endblock content %}

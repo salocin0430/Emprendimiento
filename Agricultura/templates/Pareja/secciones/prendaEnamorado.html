@@ -1,0 +1,273 @@
+
+{% load staticfiles %}
+
+<div class="card text-center">
+</div>	
+	{% load staticfiles %}
+
+<div class="card border-dark mb-2">
+	<div class="card-header bg-transparent">
+		<div class="row justify-content-between">
+			<div class="col">
+				<h4>Prendas</h4>
+			</div>
+			<div class="col text-right">
+				<span class="btn" data-toggle="collapse" data-target="#collapsePrenda" aria-expanded="false" aria-controls="collapsePrenda">
+					<i class="material-icons">expand_more</i>
+  				</span>
+			</div>
+		</div>
+  	</div>
+  	<div class="collapse" id="collapsePrenda">
+  		{% for a in prenda  %}
+  		<div class="card-body">
+	    	<form method="POST">{% csrf_token %}
+	    		<div class="card">
+	    			<div class="card-body">
+        				<div class="media">
+	    					<img class="align-self-center mr-3 little" src="{{a.Prenda.imagen.url}}" height="150">
+	    					<div class="media-body">
+								<h4 class="mt-0">{{a.Prenda.nombre}}</h4>		  
+								<p class="card-text">{{a.Prenda.descripcion}}</p>
+								<div class="media">
+									
+									<i class="material-icons">attach_money</i>
+									<div class="media-body">
+								        <p> {{a.Prenda.precio}}</p>
+								    </div>
+								</div>
+								<div class="row">
+									<div class="col text-right">
+									        <input name="carrito_prenda_id" value="{{a.id}}" hidden>
+											<input name="prenda_id" value="{{a.Prenda.id}}" hidden>
+											<input name="price" value="{{a.Prenda.precio}}" hidden>
+									        <button type="submit"  class="btn btn-danger" name="btn_value" value="delete_prenda">Eliminar</button>
+									</div>
+								</div>	
+						    </div>
+						</div>
+				    </div>
+				</div>     
+	        </form>
+		</div>
+
+		{% endfor %}
+		{% if flag_entre %}
+
+			<div class="card-body text-center">
+	    		<p>¿Aún hay espacio para algo más?</p>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#PrendaModal">¡Agregar Prenda!</button>
+			</div>
+		{% else %} {% comment %}Cuando no tiene seleccionado uno o más prendas{% endcomment %}
+		<div class="card-body text-center">
+			<h4 class="card-title, tittle-center, font-weight-bold">Deseas agregar alguna Prenda.</h4>
+     		<div class="card-body">
+			    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#PrendaMasModal">¡Prenda Masculina!</button>
+			    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#PrendaFemModal">¡Prenda Femenina!</button>
+			    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#PrendaMixModal">¡Prendas Mixtas!</button>
+
+			</div>
+		</div>
+			
+		    {% endif %}
+	</div>
+</div>
+
+<div class="modal fade" id="PrendaMasModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+	<div class="modal-dialog modal-lg" role="document">
+
+    	<div class="modal-content">
+
+      		<div class="modal-header">
+
+        		<h5 class="modal-title">Prendas</h5>
+
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+          			<span aria-hidden="true">&times;</span>
+
+        		</button>
+
+      		</div>
+
+      		<div class="modal-body">
+
+      		{% for  ropa in PrendasMas %}
+				{% if ropa.id not in lista_prendas %}
+				    	<form method="POST">{% csrf_token %}
+				    		<div class="card mb-2">
+		  						<div class="card-body">
+			        				<div class="media">
+				    					<img class="align-self-center mr-3 little" src="{{ropa.imagen.url}}" height="150">
+				    				    <div class="media-body">
+									        <h4 class="mt-0">{{ropa.nombre}}</h4>
+									        <p class="card-text">{{ropa.descripcion}}</p>
+									        <div class="media">
+									        	<i class="material-icons">attach_money</i>
+									        	<div class="media-body">
+					        						<p >{{ropa.precio}}</p>
+					        					</div>
+					        			    </div>
+					        			    <div class="row">
+												<div class="col text-right">
+											        <input name="id_prenda" value="{{ropa.id}}" hidden>
+													<input name="price" value="{{ropa.precio}}" hidden>
+											        <button type="submit" class="btn btn-primary" name="btn_value" value="add_prenda">Agregar</button>
+											        	
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+				        </form>
+				        {% endif %}
+				{% endfor %}
+
+			</div>
+
+      		<div class="modal-footer">
+
+        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+      		</div>
+
+    	</div>
+
+  	</div>
+
+</div>	
+
+<div class="modal fade" id="PrendaFemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+	<div class="modal-dialog modal-lg" role="document">
+
+    	<div class="modal-content">
+
+      		<div class="modal-header">
+
+        		<h5 class="modal-title">Prendas</h5>
+
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+          			<span aria-hidden="true">&times;</span>
+
+        		</button>
+
+      		</div>
+
+      		<div class="modal-body">
+
+      		{% for  ropa in PrendasFem %}
+				{% if ropa.id not in lista_prendas %}
+				    	<form method="POST">{% csrf_token %}
+				    		<div class="card mb-2">
+		  						<div class="card-body">
+			        				<div class="media">
+							    		<img class="align-self-center mr-3 little" src="{{ropa.imagen.url}}" height="150">
+							    		<div class="media-body">
+								        	<h4 class="mt-0">{{ropa.nombre}}</h4>
+									        <p class="card-text">{{ropa.descripcion}}</p>
+									        <div class="media">
+									        	<i class="material-icons">attach_money</i>
+									        	
+									        	<div class="media-body">
+									        		<p>{{ropa.precio}}</p>
+					       						</div>
+					       					</div>
+					       					<div class="row">
+												<div class="col text-right">
+											        <input name="id_prenda" value="{{ropa.id}}" hidden>
+													<input name="price" value="{{ropa.precio}}" hidden>
+													<button type="submit" class="btn btn-primary" name="btn_value" value="add_prenda">Agregar</button>
+					        							
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+				        </form>
+				        {% endif %}
+				{% endfor %}
+
+			</div>
+
+      		<div class="modal-footer">
+
+        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+      		</div>
+
+    	</div>
+
+  	</div>
+
+</div>	
+<div class="modal fade" id="PrendaMixModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+	<div class="modal-dialog modal-lg" role="document">
+
+    	<div class="modal-content">
+
+      		<div class="modal-header">
+
+        		<h5 class="modal-title">Prendas</h5>
+
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+          			<span aria-hidden="true">&times;</span>
+
+        		</button>
+
+      		</div>
+
+      		<div class="modal-body">
+
+      		{% for  ropa in PrendasMix %}
+				{% if ropa.id not in lista_prendas %}
+				    	<form method="POST">{% csrf_token %}
+				    		<div class="card mb-2">
+		  						<div class="card-body">
+			        				<div class="media">    		
+				    					<img class="align-self-center mr-3 little" src="{{ropa.imagen.url}}" height="150">
+				    					<div class="media-body">
+ 									        <h4 class="mt-0">{{ropa.nombre}}</h4>
+					       					<p class="card-text">{{ropa.descripcion}}</p>
+					       					<div class="media">
+					       						<i class="material-icons">attach_money</i>
+									  			<div class="media-body">
+					        						<p >{{ropa.precio}}</p>
+					        					</div>
+					        				</div>	
+					        				<div class="row">
+												<div class="col text-right">
+											        <input name="id_prenda" value="{{ropa.id}}" hidden>
+													<input name="price" value="{{ropa.precio}}" hidden>
+													<button type="submit" class="btn btn-primary" name="btn_value" value="add_prenda">Agregar</button>
+											        	
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+				        </form>
+				        {% endif %}
+				{% endfor %}
+
+			</div>
+
+      		<div class="modal-footer">
+
+        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+      		</div>
+
+    	</div>
+
+  	</div>
+
+</div>	

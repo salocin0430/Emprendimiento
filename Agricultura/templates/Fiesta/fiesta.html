@@ -1,0 +1,39 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+<link href="{% static 'css/Fiesta/style_entretenimiento.css' %}" rel="stylesheet" />
+<link href="{% static 'css/Fiesta/style_comidas.css' %}" rel="stylesheet" />
+<link href="{% static 'css/Fiesta/style.css' %}" rel="stylesheet" />
+	{% if mensaje.0 %}
+		<div class="alert alert-warning" role="alert">
+	  		{{mensaje.1}} !
+		</div>
+	{% endif %}
+
+	{% if mensaje_succes.0 %}
+		<div class="alert alert-info" role="alert">
+	  		{{mensaje_succes.1}} !
+		</div>
+	{% endif %}
+
+	{% if mensaje_delete.0 %}
+		<div class="alert alert-info" role="alert">
+	  		{{mensaje_delete.1}} !
+		</div>
+	{% endif %}
+{% endblock title %}
+
+{% block name_mod %}
+	<div class="card-header border-dark">
+    	Fiesta
+  	</div>
+{% endblock name_mod %}
+
+{% block content %}
+	{% include "Fiesta/secciones/seccion_lugar.html" %}
+	{% include "Fiesta/secciones/seccion_entretenimiento.html" %}
+	{% include "Fiesta/secciones/seccion_fotografia.html" %}
+	{% include "Fiesta/secciones/seccion_comidas.html" %}
+	{% include "Fiesta/secciones/seccion_precio.html" %}
+{% endblock content %}

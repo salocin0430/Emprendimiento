@@ -1,0 +1,116 @@
+{% load staticfiles %}
+<div class="card border-dark mb-2">
+	<div class="card-header bg-transparent">
+		<div class="row justify-content-between">
+			<div class="col">
+				<h4>Alimento</h4>
+			</div>
+			<div class="col text-right">
+				<span class="btn" data-toggle="collapse" data-target="#collapseAli" aria-expanded="false" aria-controls="collapseAli">
+					<i class="material-icons">expand_more</i>
+  				</span>
+			</div>
+		</div>
+  	</div>
+  	<div class="collapse" id="collapseAli">
+  		{% for a in alimento  %}
+ 		<div class="card-body">
+ 			<form method="POST">{% csrf_token %}
+				<div class="card">
+					<div class="card-body">
+        				<div class="media">
+						  	<img class="align-self-center mr-3" src="{{a.Alimento.imagen.url}}" height="120">
+						  	<div class="media-body">
+						    	<h5 class="mt-0"><strong>{{a.Alimento.nombre}}</strong></h5><br>
+						    	<p>{{a.Alimento.descripcion}}</p>
+						    	<div class="media">
+								  	<div class="media-body">
+								    	<p class="precio">Precio Unitario: ${{a.Alimento.precioSTR}}</p>
+								    	<p><strong>Cantidad:</strong> {{a.Cantidad}}</p>
+								    	<p class="precio">Precio total comida: ${{a.subtotal}}</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col text-right">
+										<input name="alimento_carrito_id" value="{{a.id}}" hidden>
+										<input name="comida_id" value="{{a.Alimento.id}}" hidden>
+										<input name="price" value="{{a.Alimento.precio}}" hidden>
+										<button type="submit" class="btn btn-danger" value="delete_comida" name="btn_value">Eliminar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		{% endfor %}
+		{% if flag_comida %}
+			<div class="card-body text-center">
+	    		<p>¿Crees que aún hay espacio para algo más?</p>
+	    		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AlimentoModal">¡Agregar comida!</button>
+	  		</div>
+	  	{% else %} {% comment %}Cuando no tiene seleccionado uno o más entretenimientos{% endcomment %}
+		<div class="card-body text-center">
+		      <h4 class="card-title, tittle-center, font-weight-bold">Aún no tienes agregado algún entretenimiento para tu fiesta.</h4>
+		      <p class="card-text, text-center">¡Presiona en agregar para escoger entretenimiento para tu fiesta!</p>
+		      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AlimentoModal">¡Agregar comida!</button>
+		   </div>
+		</div>
+		{% endif %}
+	</div>
+</div>
+
+<div class="modal fade" id="AlimentoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<h5 class="modal-title">Alimentos</h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+      		</div>
+      		<div class="modal-body">
+      		{% for  comida in Alimentos %}
+      			{% if comida.id not in indices_alimentos %}
+      			<form method="POST">{% csrf_token %}
+	      			<div class="card mb-2">
+  						<div class="card-body">
+	        				<div class="media">
+					  			<img class="align-self-center mr-3" src="{{comida.imagen.url}}" height="150">
+					  			<div class="media-body">
+					    			<h5 class="mt-0"><strong>{{comida.nombre}}</strong></h5>
+					    			<p>{{comida.descripcion}}</p>
+					    			<div class="media">
+							  			<div class="media-body">
+							    			<p class="precio">${{comida.precioSTR}} C/U</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col text-right">
+											<input name="id_comida" value="{{comida.id}}" hidden>
+											<input name="price" value="{{comida.precio}}" hidden>
+											<div class="row" style="margin-top:10px;">
+												<div class="col-6">
+													<input min="1" class="form-control" placeholder="Cantidad" name="cantidad_comida" type="number" required>
+												</div>
+												<div class="col-6">
+													<button type="submit" class="btn btn-primary " value="add_comida" name="btn_value">Agregar</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				{% endif %}
+				{% endfor %}
+			</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      		</div>
+    	</div>
+  	</div>
+</div>

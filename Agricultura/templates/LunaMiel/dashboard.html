@@ -1,0 +1,227 @@
+{% extends 'base/base.html' %}
+
+{% block name_mod %}
+	<div class="card-header border-dark">
+        <h2 class="text-center">LUNA DE MIEL</h2>
+  	</div>
+{% endblock name_mod %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "css/LunaMiel/fontawesome/css/fontawesome-all.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/LunaMiel/datatables/css/dataTables.bootstrap4.css" %}">
+    <link rel="stylesheet" href="{% static "css/LunaMiel/luna.css" %}">
+{% endblock styles %}
+
+{%  block content %}
+<div class="card border-dark">
+    <div class="card-body">
+        <h5 class="card-title">Actividad</h5>
+        <table id="tabla_actividades" class="table table-striped table-bordered" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Actividad</th>
+                            <th>Nombre</th>
+                            <th>Precio Unitario</th>
+                            <th>Cantidad</th>
+                            <th>Precio Total</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {%  for actividad in luna.actividadcarrito_set.all %}
+                        <tr data-id="a{{ actividad.Actividad_id }}">
+                            <td>
+                                <img class="imagen" src="{%  get_media_prefix %}{{ actividad.Actividad.imagen }}">
+                            </td>
+                            <td>{{ actividad.Actividad.nombre }}</td>
+                            <td>{{ actividad.Actividad.precio }}</td>
+                            <td>
+                                <input type="number" min="1" class="form-control" onchange="actualizarActividad({{ actividad.Actividad_id }})" value="{{ actividad.cantidad }}" />
+                            </td>
+                            <td>
+                                {{  actividad.total }}
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" onclick="removerCantidad({{ actividad.Actividad_id }})" ><i class="fa fa-ban"></i></button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <button type="button" data-toggle="modal" data-target="#modal_actividad_anadir" class="btn btn-success float-right"><i class="fa fa-plus-square"></i> Añadir actividad</button>
+    </div>
+</div>
+<div class="card border-dark mt-30">
+    <div class="card-body">
+        <h5 class="card-title">Hoteles</h5>
+        <table id="tabla_hoteles" class="table table-striped table-bordered" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Actividad</th>
+                            <th>Nombre</th>
+                            <th>Precio Unitario</th>
+                            <th>Cantidad</th>
+                            <th>Precio Total</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {%  for hotel in luna.hotelcarrito_set.all %}
+                        <tr data-id="h{{ hotel.Hotel_id }}">
+                            <td>
+                                <img class="imagen" src="{%  get_media_prefix %}{{ hotel.Hotel.imagen }}">
+                            </td>
+                            <td>{{ hotel.Hotel.nombre }}</td>
+                            <td>{{ hotel.Hotel.precio }}</td>
+                            <td>
+                                <input type="number" min="1" class="form-control" onchange="actualizarHotel({{ hotel.Hotel_id }})" value="{{ hotel.cantidad }}" />
+                            </td>
+                            <td>
+                                {{  hotel.total }}
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" onclick="removerCantidadHotel({{ hotel.Hotel_id }})" ><i class="fa fa-ban"></i></button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <button type="button" data-toggle="modal" data-target="#modal_hotel_anadir" class="btn btn-success float-right"><i class="fa fa-plus-square"></i> Añadir hotel</button>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col text-left">
+        <h1>Costo Luna de miel:</h1>
+    </div>
+    <div class="col text-right">
+        <h1 class="display-4 text-info"><strong id="precio_total">${{luna.precio}}</strong></h1>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal_actividad_anadir" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Añadir actividad</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table id="tabla_actividad_anadir" class="table table-striped table-bordered" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Actividad</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for actividad in actividades %}
+                            <tr data-id="a{{ actividad.id }}"
+                                data-precio="{{ actividad.precio }}"
+                                data-nombre="{{ actividad.nombre }}"
+                            >
+                                <td><img class="imagen" src="{%  get_media_prefix %}{{ actividad.imagen }}"></td>
+                                <td>{{ actividad.nombre }}</td>
+                                <td>{{ actividad.precio }}</td>
+                                <td>
+                                    <input type="number" min="1" class="form-control" value="1" />
+                                    <button class="btn btn-success" onclick="mostrarPanelAnadir({{ actividad.id }})" ><i class="fa fa-plus-square"></i> Añadir</button>
+                                </td>
+                            </tr>
+                        {% endfor  %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="modal_hotel_anadir" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Añadir hotel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table id="tabla_hotel_anadir" class="table table-striped table-bordered" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for hotel in hoteles %}
+                            <tr data-id="h{{ hotel.id }}"
+                                data-precio="{{ hotel.precio }}"
+                                data-nombre="{{ hotel.nombre }}"
+                            >
+                                <td><img class="imagen" src="{%  get_media_prefix %}{{ hotel.imagen }}"></td>
+                                <td>{{ hotel.nombre }}</td>
+                                <td>{{ hotel.precio }}</td>
+                                <td>
+                                    <input type="number" min="1" class="form-control" value="1" />
+                                    <button class="btn btn-success" onclick="anadirHotel({{ hotel.id }})" ><i class="fa fa-plus-square"></i> Añadir</button>
+                                </td>
+                            </tr>
+                        {% endfor  %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+    {%  include 'LunaMiel/scripts.html' %}
+    <script type="application/javascript">
+        var base_url = "{{ request.scheme }}://{{ request.get_host }}/LunaMiel";
+        var added=[];
+        $(document).ready(function(){
+
+        {%  for actividad in luna.actividadcarrito_set.all %}
+        added['a{{ actividad.Actividad.id}}']={
+                'id':{{ actividad.Actividad.id }},
+                'nombre':'{{ actividad.Actividad.nombre }}',
+                'precio': {{ actividad.Actividad.precio }},
+                'imagen':'{%  get_media_prefix %}{{ actividad.Actividad.imagen }}',
+                'cantidad':{{ actividad.cantidad }}
+            };
+        ocultarFila(tabla_actividad_anadir,'a'+{{ actividad.Actividad_id }});
+        {% endfor %}
+
+
+        {%  for hotel in luna.hotelcarrito_set.all %}
+        added['h{{ hotel.Hotel.id}}']={
+                'id':{{ hotel.Hotel.id }},
+                'nombre':'{{ hotel.Hotel.nombre }}',
+                'precio': {{ hotel.Hotel.precio }},
+                'imagen':'{%  get_media_prefix %}{{ hotel.Hotel.imagen }}',
+                'cantidad':{{ hotel.cantidad }}
+            };
+        ocultarFila(tabla_hotel_anadir,'h'+{{ hotel.Hotel_id }});
+        {% endfor %}
+
+        });
+
+
+    </script>
+    <script type="application/javascript" src="{% static 'js/LunaMiel/luna.js' %}"></script>
+{%  endblock content %}
