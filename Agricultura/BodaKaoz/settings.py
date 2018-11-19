@@ -56,7 +56,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'BodaKaoz.wsgi.application'
-'''
+
 # Database - Only for local test
 DATABASES = {
     'default': {
@@ -74,7 +74,7 @@ DATABASES = {
          'HOST': '127.0.0.1',
          'PORT': '5432',
      }
- }
+ }'''
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
