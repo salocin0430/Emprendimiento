@@ -44,10 +44,9 @@ class Lugar(models.Model):
 	
 class Boda(models.Model):
 	Enamorado1=models.ForeignKey(Enamorado, on_delete=models.CASCADE, null=True, blank=True, default=None, related_name='Enamorado1')
-	Enamorado2=models.ForeignKey(Enamorado, on_delete=models.CASCADE, null=True, blank=True, default=None, related_name='Enamorado2')
 	precio=models.BigIntegerField(default=0)
 	def __str__(self):
-		return self.Enamorado1.__str__()+" <-> "+self.Enamorado2.__str__()+" -> Boda: {}".format(self.id)
+		return self.Enamorado1.__str__()+" -> Boda: {}".format(self.id)
 	
 class Transporte(models.Model):
 	nombre=models.CharField(max_length=50)
