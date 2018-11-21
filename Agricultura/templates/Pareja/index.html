@@ -6,32 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../static/css/Estilo.css">
-    <title>KB Principal</title>
+    <title>AgricuStore Principal</title>
   
 </head>
 <body> 
   <header>
-    <nav class="navbar fixed-top navbar-dark navbar-expand-md" style="background-color: #005f93;">
+    <nav class="navbar fixed-top navbar-dark navbar-expand-md" style="background-color: #006400;">
       <div class="row">
         <div class="col-2">
           <a class="navbar-brand">
-            <img id="" src="../static/img/KBLogo_header.svg" alt="" height="45">
+            <img id="" src="../static/img/vacaanimada.png" alt="" height="45" width="50">
           </a>
         </div>
         <div class="col-10 align-self-end d-none d-xl-block">
-          <p class="text-light">Organizar tu matrimonio será más fácil y divertido</p>
+          <p class="text-light">Comprar productos por aqui es muy sencillo</p>
         </div>
       </div>
         <form class="form-inline" method = 'POST'>{% csrf_token %}
           <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Login">INICIO</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Login">NOSOTROS</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Login">SERVICIOS</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Login">CONTACTO</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Login">INICIO</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Login">NOSOTROS</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Login">SERVICIOS</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Login">CONTACTO</button>
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#Login">INGRESAR</button>
             <a class="btn btn-outline-warning " href="{% url 'Pareja:registro' %}">REGISTRAR</a>
-          </div> 
-          
+          </div>   
         </form>
     </nav>
   </header>
@@ -56,32 +55,29 @@
             <div class="modal-body">
               <form method="POST">
                 <div class="card mb-2">
-                    <div class="card-body">
+                  <div class="card-body"> 
+                    <form class="form-inline" method = 'POST'>{% csrf_token %}
+                        {% if user.is_authenticated %}
+                          <meta http-equiv="refresh" content="0; url={% url 'tableroResumen' %}">
+                        {% else %}
+                        {% if error.0 %}
+                          <div class="alert alert-warning">{{error.1}}</div>
+                        {% endif %}                                  
+                        <input class="form-control mr-sm-2 mb-2 mb-sm-0" name="username" type="text" placeholder="Doc. de Identidad" required>
+                        <input class="form-control mr-sm-2 mb-2 mb-sm-0" name="password" type="password" placeholder="Contraseña" required>
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                          <button class="btn btn-warning" type="submit">Ingresar</button>
+                        </div> 
 
 
-                              
-                            <form class="form-inline" method = 'POST'>{% csrf_token %}
-                                {% if user.is_authenticated %}
-                                  <meta http-equiv="refresh" content="0; url={% url 'tableroResumen' %}">
-                                {% else %}
-                                  {% if error.0 %}
-                                    <div class="alert alert-warning">{{error.1}}</div>
-                                  {% endif %}                                  
-                                  <input class="form-control mr-sm-2 mb-2 mb-sm-0" name="username" type="text" placeholder="Doc. de Identidad" required>
-                                  <input class="form-control mr-sm-2 mb-2 mb-sm-0" name="password" type="password" placeholder="Contraseña" required>
-                                              <div class="btn-group mr-2" role="group" aria-label="First group">
-                                                <button class="btn btn-warning" type="submit">Ingresar</button>
-                                              </div> 
+                        {% endif %}
+                    </form>
 
-             
-                                {% endif %}
-                            </form>
-
-                              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                              </button>                    
-                      
-                      </div>
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>                    
+                    
+                  </div>
               </div>
             
             </form>   
@@ -93,28 +89,37 @@
   </div>    
   <main class="container pt-5 mt-5">
     <div class="row pt-5 justify-content-center align-items-center">
-      <div class="pb-5 col-9 col-sm-8 col-md-4 col-lg-3">
-        <img class="img-fluid rounded-circle" src="{% static "img/torta.jpg" %}">
+      <div class="pb-5 col-9 col-sm-8 col-md-4 col-lg-4">
+        <img class="img-fluid rounded-circle" height="200" src="{% static "img/Ganado2.jpg" %}">
       </div>
       <div class="pb-5 col-9 col-sm-8 col-md-4 col-lg-4">
-        <img  class="img-fluid rounded-circle" src="{% static "img/pareja.jpg" %}">
+        <img class="img-fluid rounded-circle" src="{% static "img/cebolla.jpg" %}">
       </div>
-      <div class="pb-5 col-9 col-sm-8 col-md-4 col-lg-3">
-        <img class="img-fluid rounded-circle" src="{% static "img/ceremonia.jpg" %}">
+      <div class="pb-5 col-9 col-sm-8 col-md-4 col-lg-4">
+        <img class="img-fluid rounded-circle" src="{% static "img/cafe.jpg" %}">
+      </div>
+      <div class="pb-5 col-9 col-sm-8 col-md-4 col-lg-4">
+        <img class="img-fluid rounded-circle" src="{% static "img/Platanos.jpg" %}">
+      </div>
+      <div class="pb-5 col-9 col-sm-8 col-md-4 col-lg-4">
+        <img class="img-fluid rounded-circle" src="{% static "img/aguacate.jpg" %}">
+      </div>
+      <div class="pb-5 col-9 col-sm-8 col-md-4 col-lg-4">
+        <img class="img-fluid rounded-circle" src="{% static "img/marranos.jpg" %}">
       </div>
     </div>
     <div class="row">
       <div class="col text-center">
-        <h1 class="font-weight-light">Encuentra todo lo que necesitas para tu matrimonio</h1>   
+        <h1 class="font-weight-light">Encuentra cualquier producto del eje cafetero</h1>   
       </div>         
     </div>
   </main>
 
-  <footer class="footer">
+  <footer class="footer" style="background-color: #006400;">
     <div class="container">
       <div class="row">
         <div class="col">
-            <div class="text-light"><img id="" src="../static/img/KBLogo.svg" alt="" height="30">KB 2018. Todos los derechos reservados.</div> 
+            <div class="text-light"><img id="" src="../static/img/vacaanimada.png" alt="" height="30">KB 2018. Todos los derechos reservados.</div> 
         </div>
       </div>
     </div>
