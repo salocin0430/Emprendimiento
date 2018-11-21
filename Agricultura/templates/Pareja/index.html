@@ -24,10 +24,9 @@
       </div>
         <form class="form-inline" method = 'POST'>{% csrf_token %}
           <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Login">INICIO</button>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Login">NOSOTROS</button>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Login">SERVICIOS</button>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Login">CONTACTO</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nosotros">NOSOTROS</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#servicios">SERVICIOS</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#contacto">CONTACTO</button>
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#Login">INGRESAR</button>
             <a class="btn btn-outline-warning " href="{% url 'Pareja:registro' %}">REGISTRAR</a>
           </div>   
@@ -87,6 +86,196 @@
   </div> 
   </div> 
   </div>    
+
+
+
+
+<div class="modal fade" id="nosotros" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+              <h5 class="modal-title">Nosotros</h5>
+
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                  <span aria-hidden="true">&times;</span>
+
+              </button>
+
+            </div>
+
+            <div class="modal-body">
+              <form method="POST">
+                <div class="card mb-2">
+                  <div class="card-body"> 
+                    <form class="form-inline" method = 'POST'>{% csrf_token %}
+                        {% if user.is_authenticated %}
+                          <meta http-equiv="refresh" content="0; url={% url 'tableroResumen' %}">
+                        {% else %}
+                        {% if error.0 %}
+                          <div class="alert alert-warning">{{error.1}}</div>
+                        {% endif %}                                  
+                        <h1>Mision</h1>
+                        <h3>
+                          Somos una empresa intermediaria, que busca conectar productores
+                          agrícolas con clientes potenciales, optimizando y haciendo más simple y eficaz la
+                          venta de dichos productos. A su vez, provocar un impacto social y educativo en las
+                          escuelas rurales, capacitando e instruyendo a los niños con respecto al uso de
+                          nuevas tecnologías, como lo es nuestra plataforma.
+                        </h3>
+                        <h1>Vision</h1>
+                        <h3>
+                          En 5 años estar expandidos en más veredas del eje cafetero, no
+                          únicamente siendo intermediarios de la cebolla de la florida, sino también de más
+                          productos agrícolas comercializados en el eje cafetero. A su vez, contar con el
+                          cubrimiento del mayor numero posibles de escuelas rurales de la región, con el fin
+                          de que los niños puedan interactuar con las nuevas tecnologías.
+                        </h3>
+
+                        {% endif %}
+                    </form>
+
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>                    
+                    
+                  </div>
+              </div>
+            
+            </form>   
+
+          </div>
+
+  </div> 
+  </div> 
+</div>    
+
+
+
+
+<div class="modal fade" id="servicios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+              <h5 class="modal-title">Servicios</h5>
+
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                  <span aria-hidden="true">&times;</span>
+
+              </button>
+
+            </div>
+
+            <div class="modal-body">
+              <form method="POST">
+                <div class="card mb-2">
+                  <div class="card-body"> 
+                    <form class="form-inline" method = 'POST'>{% csrf_token %}
+                        {% if user.is_authenticated %}
+                          <meta http-equiv="refresh" content="0; url={% url 'tableroResumen' %}">
+                        {% else %}
+                        {% if error.0 %}
+                          <div class="alert alert-warning">{{error.1}}</div>
+                        {% endif %} 
+                            <h1>Internet:</h1>                                 
+                            <h3>
+                                El internet se a convertido en uno de los principales medios por los cuales podemos llegar a
+                                nuestros clientes. Este es muy amplio, ya que cuenta con diversas formas de usar. Entre ellas está
+                                la comunicación por medio de las redes sociales, también a través de páginas web y ahora muy
+                                popularmente a través de YouTube. Este canal sería considerado indirecto, y lo centraríamos mas
+                                a lo clientes, empresas y entre otros, que deseen conocer de nuestra plataforma para adquirir
+                                nuestros productos.
+                            </h3>
+                            <h1>Telefonía:</h1>
+                            <h3>
+                                A pesar de que la telefonía es de lo canales más antiguos, y se ha tratado de remplazar con las
+                                nuevas tecnologías, este ha perdurado hasta el momento y es actualmente usado en la mayoría de
+                                las empresas para la comunicación entre tanto clientes como ´proveedores. Este medio de
+                                comunicación es directo y lo usaremos para establecer mayormente comunicación con nuestros
+                                proveedores. Esto se debe a que en las zonas rurales actualmente cuentan con poca cobertura de
+                                internet, y actualmente se a aumentado la señal telefónica.
+                            </h3>
+
+                        {% endif %}
+                    </form>
+
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>                    
+                    
+                  </div>
+              </div>
+            
+            </form>   
+
+          </div>
+
+  </div> 
+  </div> 
+</div>    
+
+
+
+
+<div class="modal fade" id="contacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+              <h5 class="modal-title">Contacto</h5>
+
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                  <span aria-hidden="true">&times;</span>
+
+              </button>
+
+            </div>
+
+            <div class="modal-body">
+              <form method="POST">
+                <div class="card mb-2">
+                  <div class="card-body"> 
+                    <form class="form-inline" method = 'POST'>{% csrf_token %}
+                        {% if user.is_authenticated %}
+                          <meta http-equiv="refresh" content="0; url={% url 'tableroResumen' %}">
+                        {% else %}
+                        {% if error.0 %}
+                          <div class="alert alert-warning">{{error.1}}</div>
+                        {% endif %}                                  
+                          <h3>Nos pueden contactar a los siguientes correos</h3>
+                          <h3>shuertas@utp.edu.co</h3>
+                          <h3>nicolasruizo430@utp.edu.co</h3>
+                        {% endif %}
+                    </form>
+
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>                    
+                    
+                  </div>
+              </div>
+            
+            </form>   
+
+          </div>
+
+  </div> 
+  </div> 
+</div>    
+
+
+
+
   <main class="container pt-5 mt-5">
     <div class="row pt-5 justify-content-center align-items-center">
       <div class="pb-5 col-9 col-sm-8 col-md-4 col-lg-4">
@@ -119,7 +308,7 @@
     <div class="container">
       <div class="row">
         <div class="col">
-            <div class="text-light"><img id="" src="../static/img/vacaanimada.png" alt="" height="30">KB 2018. Todos los derechos reservados.</div> 
+            <div class="text-light"><img id="" src="../static/img/vacaanimada.png" alt="" height="30">AgricuStore. Todos los derechos reservados.</div> 
         </div>
       </div>
     </div>
