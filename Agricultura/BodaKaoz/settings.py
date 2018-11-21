@@ -22,7 +22,6 @@ INSTALLED_APPS = [
     # Apps
 	'Domain',
 	'Pareja',
-	'Ceremonia',
 	'Fiesta',
 	'LunaMiel',
 ]

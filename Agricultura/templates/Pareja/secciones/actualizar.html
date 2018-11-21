@@ -1,0 +1,87 @@
+{% load staticfiles %}
+
+<div class="container pt-5 mt-5"> 
+    <form method="POST">{% csrf_token %}  
+        {% if mensaje.0 %}  
+            <div class="alert alert-success alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>¡Correcto!</strong> {{mensaje.1}}
+            </div>        
+        {% endif %}
+        {% if error.0 %} 
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error: </strong>{{error.1}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-lg-6 mb-3 mb-lg-0">
+                        <div class="card">
+                            <div class="card-body pt-2">
+                                <h1 class="font-weight-light mb-3">Actualizate!!</h1>
+                                <div class="form-row">
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="nombreMEN">Nombre</label>
+                                        <input type="text" name="nombreMEN" value="{{ enamoradoNombre.User.first_name }}" class="form-control" id="nombreMEN" / placeholder="Nombre" required>
+                                    </div>
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="apellidoMEN">Apellido</label>
+                                        <input type="text" name="apellidoMEN" value="{{ enamoradoNombre.User.last_name }}" class="form-control" id="apellidoMEN" / placeholder="Apellido" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">  
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="identificacionMEN">Identificación</label>
+                                        <input type="number" name="identificacionMEN" value="{{ enamoradoNombre.User.username}}" class="form-control" id="identificacionMEN" / placeholder="##########" required>
+                                    </div>
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="telefonoMEN">Teléfono</label>
+                                        <input type="number min=1" name="telefonoMEN" value="{{enamoradoNombre.telefono}}" class="form-control" id="telefonoMEN" / placeholder="#######" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="emailMEN">Email</label>
+                                    <input type="email" name="emailMEN" value="{{enamoradoNombre.User.email}}" class="form-control" id="emailMEN" / placeholder="example@compañia.com" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12 col-md-8">
+                        <div class="form-row">  
+                            <div class="form-group col-12 col-md-6">
+                                <label for="password">Contraseña</label>
+                                <input  type="password" name="password" class="form-control" id="password" / placeholder="Contraseña" required>
+                            </div>
+                            <div class="form-group col-12 col-md-6">
+                                <label for="passwordAut">Confirmar contraseña</label>
+                                <input  type="password" name="passwordAut" class="form-control" id="passwordAut" / placeholder="Contraseña" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 align-self-center">   
+                        <button type="submit" class="btn btn-warning btn-lg btn-block col-xs-12">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        
+    </form>
+</div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="text-light"><img id="" src="/static/img/KBLogo.svg" alt="" height="30">KB 2018. Todos los derechos reservados.</div> 
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>

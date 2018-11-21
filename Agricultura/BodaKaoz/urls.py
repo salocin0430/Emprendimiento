@@ -26,10 +26,9 @@ urlpatterns = [
 	# path('', include('Domain.urls')), #contenedor de urls principal
 	path('', Login , name='index' ),
 	path('resumen/', TableroResumen, name='tableroResumen'),# Tablero temporal hecho por pareja
-	path('pareja/', include('Pareja.urls', namespace="Pareja")),
-	path('Ceremonia/', include('Ceremonia.urls', namespace="Ceremonia")),
-	path('fiesta/', include('Fiesta.urls', namespace="Fiesta")),
-	path('LunaMiel/', include('LunaMiel.urls', namespace="LunaMiel")),
+	path('Usuario/', include('Pareja.urls', namespace="Pareja")),
+	path('Leche/', include('Fiesta.urls', namespace="Fiesta")),
+	path('Cebolla/', include('LunaMiel.urls', namespace="LunaMiel")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = handler404View

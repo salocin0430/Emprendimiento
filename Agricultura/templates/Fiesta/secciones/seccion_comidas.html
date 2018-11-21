@@ -3,7 +3,7 @@
 	<div class="card-header bg-transparent">
 		<div class="row justify-content-between">
 			<div class="col">
-				<h4>Alimento</h4>
+				<h4>Leche</h4>
 			</div>
 			<div class="col text-right">
 				<span class="btn" data-toggle="collapse" data-target="#collapseAli" aria-expanded="false" aria-controls="collapseAli">
@@ -48,13 +48,13 @@
 		{% if flag_comida %}
 			<div class="card-body text-center">
 	    		<p>¿Crees que aún hay espacio para algo más?</p>
-	    		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AlimentoModal">¡Agregar comida!</button>
+	    		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AlimentoModal">¡Agregar Leche!</button>
 	  		</div>
 	  	{% else %} {% comment %}Cuando no tiene seleccionado uno o más entretenimientos{% endcomment %}
 		<div class="card-body text-center">
-		      <h4 class="card-title, tittle-center, font-weight-bold">Aún no tienes agregado algún entretenimiento para tu fiesta.</h4>
-		      <p class="card-text, text-center">¡Presiona en agregar para escoger entretenimiento para tu fiesta!</p>
-		      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AlimentoModal">¡Agregar comida!</button>
+		      <h4 class="card-title, tittle-center, font-weight-bold">Aún no tienes agregado ningun lacteo en tu canasta.</h4>
+		      <p class="card-text, text-center">¡Presiona en agregar para escoger un producto lacteo!</p>
+		      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AlimentoModal">¡Agregar Leche!</button>
 		   </div>
 		</div>
 		{% endif %}
@@ -65,7 +65,7 @@
 	<div class="modal-dialog modal-lg" role="document">
     	<div class="modal-content">
       		<div class="modal-header">
-        		<h5 class="modal-title">Alimentos</h5>
+        		<h5 class="modal-title">LECHES</h5>
         		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
           			<span aria-hidden="true">&times;</span>
         		</button>

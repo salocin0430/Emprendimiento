@@ -16,6 +16,30 @@
 
 </head>
 <body class="bg-light">
+	<header>
+	    <nav class="navbar fixed-top navbar-dark navbar-expand-md" style="background-color: #005f93;">
+	        <div class="row">
+	            <div class="col-2">
+	                <a class="navbar-brand">
+	                    <img id="" src="/static/img/KBLogo_header.svg" alt="" height="45">
+	                </a>
+	            </div>
+	            <div class="col-10 align-self-end d-none d-xl-block">
+	                <p class="text-light">Organizar tu matrimonio será más fácil y divertido</p>
+	            </div>
+	        </div>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+	            <span class="navbar-toggler-icon"></span>
+	        </button>
+	        <div class="collapse navbar-collapse" id="navbarCollapse">
+	            <div class="navbar-nav mr-auto">
+	            </div>
+	            <div class="btn-group mr-2" role="group" aria-label="Second group">
+	                <a class="btn btn-outline-warning " href="{% url 'Pareja:cerrar-sesion' %}">Cerrar sesion</a>
+	            </div>
+	        </div>
+	    </nav>
+	</header>	
 	<script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
 	<script src="{% static "js/bootstrap.min.js" %}"></script>
 	{% block scripts %}
@@ -30,53 +54,37 @@
 		   			<a class="nav-link" href="#">Enamorado</a>
 		   		</li>
 		   		<li class="nav-item">
-		   			<a class="nav-link" href="#">Enamorada</a>
-		   		</li>
-		   		<li class="nav-item ac active">
-		       		<a class="nav-link" href="#">Ceremonia</a>
+		   			<a class="nav-link" href="#">Leche</a>
 		   		</li>
 		   		<li class="nav-item">
-		   			<a class="nav-link" href="#">Fiesta</a>
+		   			<a class="nav-link" href="{%  url 'LunaMiel:dashboard' %}">Cebolla</a>
 		   		</li>
 		   		<li class="nav-item">
-		   			<a class="nav-link" href="{%  url 'LunaMiel:dashboard' %}">Luna de miel</a>
-		   		</li>
-		   		<li class="nav-item">
-		   			<a class="nav-link" href="{% url 'tableroResumen' %}">Resumen</a>
+		   			<a class="nav-link" href="{% url 'tableroResumen' %}">Canasta Resumen</a>
 		   		</li>
 		   	</ul>
 		</div>
 	</nav>
 	<div class="container container-md-fluid">
-		<div class="row mt-5 pt-4 pt-md-0 mb-4">
+		<div class="row mt-5 pt-4 pt-md-12 mb-4">
 			<div class="d-none d-md-block col-lg-3 col-md-4 col-sm-12">
 				<div class="card border-dark">
   					<img class="card-img-top" src="{% static 'img/KBLogo_header.svg' %}">
   					<div class="card-body">
     					<ul class="list-group list-group-flush">
 						  <li class="list-group-item">
-						  	<a href="{% url 'Pareja:enamorado1' %}" class="text-dark" data-toggle="" aria-expanded="true" aria-controls="">
-								Enamorado - {{ enamoradoNombre.User.first_name }} {{ enamoradoNombre.User.last_name }}
-							</a>
-						  </li>
-						  <li class="list-group-item">
-						  	<a href="{% url 'Pareja:enamorado2' %}" class="text-dark" data-toggle="" aria-expanded="true" aria-controls="">
-								Enamorado - {{ enamoradoNombre2.User.first_name }} {{ enamoradoNombre2.User.last_name }}
-							</a>
-						  </li>
-						  <li class="list-group-item">
-						  	<a href="{% url 'Ceremonia:dashboard' user_id boda_id ceremonia_id %}" class="text-dark" data-toggle="" aria-expanded="true" aria-controls="">
-								Ceremonia
+						  	<a href="{% url 'Pareja:actualizar' %}" class="text-dark" data-toggle="" aria-expanded="true" aria-controls="">
+								Bienvenido - {{ enamoradoNombre.User.first_name }} {{ enamoradoNombre.User.last_name }}
 							</a>
 						  </li>
 						  <li class="list-group-item">
 						  	<a href="{% url 'Fiesta:dashboard' user_id boda_id fiesta_id %}" class="text-dark" data-toggle="" aria-expanded="true" aria-controls="">
-								Fiesta
+								Leche
 							</a>
 						  </li>
 						  <li class="list-group-item">
 						  	<a href="{% url 'LunaMiel:dashboard' %}" class="text-dark" data-toggle="" aria-expanded="true" aria-controls="">
-								Luna de miel
+								Cebolla
 							</a>
 						  </li>
 						  <li class="list-group-item">

@@ -26,15 +26,13 @@
 
 {% block name_mod %}
 	<div class="card-header border-dark">
-    	Enamorado - {{ enamorado.User.first_name }} {{ enamorado.User.last_name }}
+    	Usuario : {{ enamoradoNombre.User.first_name }} {{ enamoradoNombre.User.last_name }}
   	</div>
 {% endblock name_mod %}
 
 {% block content %}
-	{% include "Pareja/secciones/prendaEnamorado.html" %}
-	{% include "Pareja/secciones/bellezaEnamorado.html" %}
-	{% include "Pareja/secciones/accesorioEnamorado.html" %}
-	{% include "Pareja/secciones/precio.html" %}
+	{% include "Pareja/secciones/actualizar.html" %}
+
 	
 
 {% endblock content %}
